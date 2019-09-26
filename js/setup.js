@@ -1,8 +1,7 @@
 'use strict';
 //Покажите блок .setup, убрав в JS-коде у него класс .hidden
-var setup = document.querySelector('.setup');
-setup.classList.remove('hidden');
-
+var userDialog = document.querySelector('.setup');
+userDialog.classList.remove('hidden');
 //покажем блок с похожими персонажами
 document.querySelector('.setup-similar').classList.remove('hidden');
 var similarListElement = document.querySelector('.setup-similar-list');
@@ -28,10 +27,17 @@ var wizards = [
     coatColor: 'rgb(241,243,107)'
   }
 ];
-for(var i=0; i<WIZARDS_NAMES.length; i++){
+var renderWizard  = function (wizard)  {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent=wizards[i].name;
   wizardElement.querySelector('.wizard-coat').style.fill=wizards[i].coatColor;
-  similarListElement.appendChild(wizardElement);
+  return wizardElement;
+};
+
+var fragment = document.createDocumentFragment();
+for(var i=0; i<WIZARDS_NAMES.length; i++){
+  fragment.appendChild(renderWizard(wizards[i]));
 }
+similarListElement.appendChild(fragment);
+userDialog.querySelector('.setup-similar').classList.remove('hidden');
