@@ -12,6 +12,7 @@ let arr2=[
   "Уютное бунгало далеко от моря",
   "Неуютное бунгало по колено в воде"
 ];
+let x,y;
 
 function generateAvatar() {
   let random=Math.floor(Math.random()*arr.length);
@@ -26,9 +27,9 @@ function generateTitle() {
   return  elem[0];
 }
 //проверить нижнюю функцию
-function generateAddress() {
-  return `${location.x}, ${location.y}`;
-}
+// function generateAddress() {
+//   return `${location.x}, ${location.y}`;
+// }
 
 function generatePrice() {
   let price =Math.floor(Math.random()*999000 + 1000) ;
@@ -78,15 +79,33 @@ function generatePhotos() {
   return arr;
 }
 
+function generateX() {
+  let map = document.querySelector('.map__pins');
+  let width=map.offsetWidth;
+  let random = Math.floor(Math.random()*width);
+  x=random;
+  return random;
+}
+
+function generateY() {
+  let random = Math.floor(Math.random()*500 + 130);
+  y=random;
+  return random;
+}
+
 
 function generateAdvert() {
   return {
     author: {
       avatar: generateAvatar()
     },
+    location: {
+      x: generateX(),
+      y: generateY()
+    },
     offer: {
       title: generateTitle(),
-      address: generateAddress(),
+      address:  `${x}, ${y}`,
       price: generatePrice(),
       type: generateType(),
       rooms: generateRooms(),
@@ -96,13 +115,20 @@ function generateAdvert() {
       features: generateFeatures(),
       description:'',
       photos: generatePhotos()
-    },
-    location: {
-      x: generateX(),
-      y: generateY()
     }
   };
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+for(let i=0; i<8;i++){
+  adverts.push(generateAdvert());
+}
+for(let item of adverts){
+  console.dir(item);
+}
+//DOM
+let map = document.querySelector('.map');
+map.classList.remove('map--faded');
+
 
 
 
