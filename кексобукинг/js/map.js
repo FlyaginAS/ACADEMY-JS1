@@ -64,7 +64,19 @@ function generateCheckout() {
   return arr[random];
 }
 
+function generateFeatures() {
+  let features=['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  return features;
+}
 
+function generatePhotos() {
+  let arr=[
+    "http://o0.github.io/assets/images/tokyo/hotel1.jpg",
+    "http://o0.github.io/assets/images/tokyo/hotel2.jpg",
+    "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
+  ];
+  return arr;
+}
 
 
 function generateAdvert() {
