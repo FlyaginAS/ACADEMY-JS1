@@ -58,6 +58,12 @@ function generateCheckin() {
   return arr[random];
 }
 
+function generateCheckout() {
+  let arr=['12:00', '13:00', '14:00'];
+  let random=Math.floor(Math.random()*arr.length);
+  return arr[random];
+}
+
 
 
 
