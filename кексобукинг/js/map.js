@@ -67,6 +67,8 @@ function generateCheckout() {
 
 function generateFeatures() {
   let features=['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  let random=Math.floor(Math.random()*features.length);
+  features.length=random;
   return features;
 }
 
@@ -150,14 +152,14 @@ function createCard(adverts) {
     card.classList.add('popup');
 
     card.innerHTML=`
-    <img src="img/avatars/user01.png" class="popup__avatar" width="70" height="70">
+    <img src=${adverts[i].author.avatar} class="popup__avatar" width="70" height="70">
     <button class="popup__close">Закрыть</button>
-    <h3>`${adverts[i].offer.title}`</h3>
-    <p><small>`${adverts[i].offer.address}`</small></p>
-    <p class="popup__price">`${adverts[i].offer.price}`&#x20bd;/ночь</p>
-    <h4>Квартира</h4>
-    <p>2 комнаты для 3 гостей</p>
-    <p>Заезд после 14:00, выезд до 10:00</p>
+    <h3>${adverts[i].offer.title}</h3>
+    <p><small>${adverts[i].offer.address}</small></p>
+    <p class="popup__price">${adverts[i].offer.price}&#x20bd;/ночь</p>
+    <h4>${adverts[i].offer.type}</h4>
+    <p>${adverts[i].offer.rooms} комнаты для ${adverts[i].offer.guests} гостей</p>
+    <p>Заезд после ${adverts.offer.checkin}, выезд до ${adverts.offer.checkout}</p>
     <ul class="popup__features">
       <li class="feature feature--wifi"></li>
       <li class="feature feature--dishwasher"></li>
@@ -166,7 +168,7 @@ function createCard(adverts) {
       <li class="feature feature--elevator"></li>
       <li class="feature feature--conditioner"></li>
     </ul>
-    <p>Великолепная квартира-студия в центре Токио. Подходит как туристам, так и бизнесменам. Квартира полностью укомплектована и недавно отремонтирована.</p>
+    <p>${adverts.offer.description}</p>
     <ul class="popup__pictures">
       <li><img src=""></li>
     </ul>`;
