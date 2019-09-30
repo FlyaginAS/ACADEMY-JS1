@@ -143,9 +143,11 @@ function createPins(adverts) {
   document.querySelector('.map__pins').append(fragment);
 }
 createPins(adverts);
+
 //создаем объявление
 function createCard(adverts) {
   let fragment=document.createDocumentFragment();
+
   for(let i=0; i<adverts.length; i++){
     let card = document.createElement('article');
     card.classList.add('map__card');
@@ -155,26 +157,35 @@ function createCard(adverts) {
     <img src=${adverts[i].author.avatar} class="popup__avatar" width="70" height="70">
     <button class="popup__close">Закрыть</button>
     <h3>${adverts[i].offer.title}</h3>
-    <p><small>${adverts[i].offer.address}</small></p>
-    <p class="popup__price">${adverts[i].offer.price}&#x20bd;/ночь</p>
+    <p><small>102-0082 Tōkyō-to, Chiyoda-ku, Ichibanchō, ${adverts[i].offer.address}</small></p>
+    <p class="popup__price">${adverts[i].offer.price} &#x20bd;/ночь</p>
     <h4>${adverts[i].offer.type}</h4>
     <p>${adverts[i].offer.rooms} комнаты для ${adverts[i].offer.guests} гостей</p>
-    <p>Заезд после ${adverts.offer.checkin}, выезд до ${adverts.offer.checkout}</p>
+    <p>Заезд после ${adverts[i].offer.checkin}, выезд до ${adverts[i].offer.checkout}</p>
     <ul class="popup__features">
-      <li class="feature feature--wifi"></li>
-      <li class="feature feature--dishwasher"></li>
-      <li class="feature feature--parking"></li>
-      <li class="feature feature--washer"></li>
-      <li class="feature feature--elevator"></li>
-      <li class="feature feature--conditioner"></li>
+      <li class="feature feature--wifi">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
+      <li class="feature feature--dishwasher">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
+      <li class="feature feature--parking">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
+      <li class="feature feature--washer">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
+      <li class="feature feature--elevator">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
+      <li class="feature feature--conditioner">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
     </ul>
-    <p>${adverts.offer.description}</p>
+    <p>${adverts[i].offer.description}</p>
     <ul class="popup__pictures">
-      <li><img src=""></li>
+      <li><img src=${adverts[i].offer.photos[0]}></li>
+      <li><img src="${adverts[i].offer.photos[1]}"></li>
+      <li><img src="${adverts[i].offer.photos[2]}"></li>
     </ul>`;
 
+    fragment.append(card);
   }
+  // let map=document.querySelector('.map');
+  let filters=document.querySelector('.map__filters-container');
+  filters.before(fragment);
 }
+createCard(adverts);
+
+
 
 
 
