@@ -122,12 +122,57 @@ function generateAdvert() {
 for(let i=0; i<8;i++){
   adverts.push(generateAdvert());
 }
-for(let item of adverts){
-  console.dir(item);
-}
+
 //DOM
 let map = document.querySelector('.map');
 map.classList.remove('map--faded');
+
+//функция по созданию pin
+function createPins(adverts) {
+  let fragment = document.createDocumentFragment();
+  for(let i=0; i<adverts.length; i++){
+    let pin = document.querySelector('template').content.querySelector('.map__pin').cloneNode(true);
+    let pinImg = pin.querySelector('img');
+    pin.style=`left: ${adverts[i].location.x + 20}px; top: ${adverts[i].location.y + 65}px;`;
+    pinImg.src=`${adverts[i].author.avatar}`;
+    pinImg.alt=`${adverts[i].offer.title}`;
+    fragment.appendChild(pin);
+  }
+  document.querySelector('.map__pins').append(fragment);
+}
+createPins(adverts);
+//создаем объявление
+function createCard(adverts) {
+  let fragment=document.createDocumentFragment();
+  for(let i=0; i<adverts.length; i++){
+    let card = document.createElement('article');
+    card.classList.add('map__card');
+    card.classList.add('popup');
+
+    card.innerHTML=`
+    <img src="img/avatars/user01.png" class="popup__avatar" width="70" height="70">
+    <button class="popup__close">Закрыть</button>
+    <h3>`${adverts[i].offer.title}`</h3>
+    <p><small>`${adverts[i].offer.address}`</small></p>
+    <p class="popup__price">`${adverts[i].offer.price}`&#x20bd;/ночь</p>
+    <h4>Квартира</h4>
+    <p>2 комнаты для 3 гостей</p>
+    <p>Заезд после 14:00, выезд до 10:00</p>
+    <ul class="popup__features">
+      <li class="feature feature--wifi"></li>
+      <li class="feature feature--dishwasher"></li>
+      <li class="feature feature--parking"></li>
+      <li class="feature feature--washer"></li>
+      <li class="feature feature--elevator"></li>
+      <li class="feature feature--conditioner"></li>
+    </ul>
+    <p>Великолепная квартира-студия в центре Токио. Подходит как туристам, так и бизнесменам. Квартира полностью укомплектована и недавно отремонтирована.</p>
+    <ul class="popup__pictures">
+      <li><img src=""></li>
+    </ul>`;
+
+  }
+}
 
 
 
