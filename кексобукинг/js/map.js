@@ -145,6 +145,15 @@ function createPins(adverts) {
 createPins(adverts);
 
 //создаем объявление
+function genLi(n) {
+  let arr= generateFeatures();
+  let s;
+  if(arr[n]===undefined){
+    return '';
+  } else {
+    return arr[n];
+  }
+}
 function createCard(adverts) {
   let fragment=document.createDocumentFragment();
 
@@ -163,12 +172,12 @@ function createCard(adverts) {
     <p>${adverts[i].offer.rooms} комнаты для ${adverts[i].offer.guests} гостей</p>
     <p>Заезд после ${adverts[i].offer.checkin}, выезд до ${adverts[i].offer.checkout}</p>
     <ul class="popup__features">
-      <li class="feature feature--wifi">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
-      <li class="feature feature--dishwasher">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
-      <li class="feature feature--parking">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
-      <li class="feature feature--washer">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
-      <li class="feature feature--elevator">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
-      <li class="feature feature--conditioner">${(generateFeatures()[0]!=undefined)? generateFeatures()[0]:''}</li>
+      <li class="feature feature--wifi">${genLi(0)}</li>
+      <li class="feature feature--dishwasher">${genLi(1)}</li>
+      <li class="feature feature--parking">${genLi(2)}</li>
+      <li class="feature feature--washer">${genLi(3)}</li>
+      <li class="feature feature--elevator">${genLi(4)}</li>
+      <li class="feature feature--conditioner">${genLi(5)}</li>
     </ul>
     <p>${adverts[i].offer.description}</p>
     <ul class="popup__pictures">
