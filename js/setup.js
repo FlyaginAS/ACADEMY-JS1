@@ -150,8 +150,8 @@ let inputBall=document.querySelector('input[name="fireball-color"');
 let fireColors = [
   '#ee4830',
   '#30a8ee',
-  '#5ce6co',
-  '#e848d8',
+  '#5ce6c0',
+  '#e848d5',
   '#e6e848'
 ];
 function generateColorBall(fireColors) {
@@ -159,7 +159,10 @@ function generateColorBall(fireColors) {
   return fireColors[random];
 }
 fireBall.addEventListener('click', function () {
-  fireBall.style.background=`${generateColorBall(fireColors)}`;
-  inputBall.value=fireBall.style.background;
+  let x=`${generateColorBall(fireColors)}`;
+  fireBall.style.backgroundColor=x;
+  inputBall.value=x;
 });
+
+//Форма должна отправляться на урл
 
