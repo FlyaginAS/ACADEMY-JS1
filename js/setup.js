@@ -42,4 +42,92 @@ for(var i=0; i<WIZARDS_NAMES.length; i++){
 similarListElement.appendChild(fragment);
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
-//
+//4 СОБЫТИЯ*************************************************************************************
+
+//Окно.setup должно открываться по нажатию на блок.setup-open.
+// Открытие окна производится удалением класса hidden у блока
+let setupOpen=document.querySelector('.setup-open-icon');
+let setupClose=document.querySelector('.setup-close');
+let setupSubmit = document.querySelector('.setup-submit');
+let form= document.querySelector('.setup-wizard-form');
+
+setupOpen.tabIndex=0;
+setupClose.tabIndex=0;
+
+function onDialogEsc(evt) {
+  if(evt.keyCode===27 && document.activeElement==setupClose) {
+    closeDialog();
+  }
+}
+
+function openDialog(){
+  userDialog.classList.remove('hidden');
+  document.addEventListener('keydown', onDialogEsc);
+}
+function closeDialog() {
+  userDialog.classList.add('hidden');
+  document.removeEventListener('keydown', onDialogEsc);
+}
+function submitSetup(){
+  form.submit();
+}
+setupOpen.addEventListener('click', function () {
+  openDialog();
+});
+setupOpen.addEventListener('keydown', function (evt) {
+  if(evt.keyCode===13){
+    openDialog();
+  }
+});
+setupClose.addEventListener('click', function () {
+  closeDialog();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if(evt.keyCode===13){
+    closeDialog();
+  }
+});
+form.addEventListener('keydown', function (evt) {
+  if(evt.keyCode===13) {
+    evt.preventDefault();
+  }
+});
+setupSubmit.addEventListener('keydown', function (evt) {
+  if(evt.keyCode===13 && document.activeElement===setupSubmit){
+    submitSetup();
+  }
+});
+
+//Валидация ввода имени персонажа
+let setupUserName = document.querySelector('.setup-user-name');
+setupUserName.minLength=2;
+setupUserName.maxLength=25;
+
+//Изменение цвета мантии персонажа по нажатию
+let coat = document.querySelector('.setup-wizard .wizard-coat');
+let rgb = [
+  'rgb(101, 137, 164)',
+  'rgb(241, 43, 107)',
+  'rgb(146, 100, 161)',
+  'rgb(56, 159, 117)',
+  'rgb(215, 210, 55)',
+  'grb(0,0,0)'
+];
+function generateColorCoat(rgb) {
+  let random = Math.floor(Math.random()*rgb.length);
+  return rgb[random];
+}
+coat.addEventListener('click', function () {
+  coat.style.fill=`${generateColorCoat(rgb)}`;
+});
+
+//Изменение цвета глаз персонажа по нажатию
+let  eyes= document.querySelector('.setup-wizard .wizard-eyes');
+let colors=[
+  'black',
+  'red',
+  'blue',
+  'yellow',
+  'green'
+];
