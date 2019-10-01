@@ -164,5 +164,5 @@ fireBall.addEventListener('click', function () {
   inputBall.value=x;
 });
 
-//Форма должна отправляться на урл
+//Форма должна отправляться на урл прописал в html
 
