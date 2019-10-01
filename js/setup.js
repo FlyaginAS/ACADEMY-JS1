@@ -1,7 +1,7 @@
 'use strict';
 //Покажите блок .setup, убрав в JS-коде у него класс .hidden
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+// userDialog.classList.remove('hidden');
 //покажем блок с похожими персонажами
 document.querySelector('.setup-similar').classList.remove('hidden');
 var similarListElement = document.querySelector('.setup-similar-list');
@@ -41,3 +41,5 @@ for(var i=0; i<WIZARDS_NAMES.length; i++){
 }
 similarListElement.appendChild(fragment);
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+//

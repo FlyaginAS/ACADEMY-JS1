@@ -181,9 +181,9 @@ function createCard(adverts) {
     </ul>
     <p>${adverts[i].offer.description}</p>
     <ul class="popup__pictures">
-      <li><img src=${adverts[i].offer.photos[0]}></li>
-      <li><img src="${adverts[i].offer.photos[1]}"></li>
-      <li><img src="${adverts[i].offer.photos[2]}"></li>
+      <li><img src="${adverts[i].offer.photos[Math.floor(Math.random()*3)]}"></li>
+      <li><img src="${adverts[i].offer.photos[Math.floor(Math.random()*3)]}"></li>
+      <li><img src="${adverts[i].offer.photos[Math.floor(Math.random()*3)]}"></li>
     </ul>`;
 
     fragment.append(card);
