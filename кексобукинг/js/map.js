@@ -127,7 +127,7 @@ for(let i=0; i<8;i++){
 
 //DOM
 let map = document.querySelector('.map');
-map.classList.remove('map--faded');
+// map.classList.remove('map--faded');
 
 //функция по созданию pin
 function createPins(adverts) {
@@ -142,7 +142,7 @@ function createPins(adverts) {
   }
   document.querySelector('.map__pins').append(fragment);
 }
-createPins(adverts);
+// createPins(adverts);
 
 //создаем объявление
 function genLi(n) {
@@ -192,7 +192,17 @@ function createCard(adverts) {
   let filters=document.querySelector('.map__filters-container');
   filters.before(fragment);
 }
-createCard(adverts);
+// createCard(adverts);
+
+//Лекция 04*************************************************************************************
+//По умолчанию все поля не активны
+let fields=document.querySelectorAll('fieldset');
+for(let item of fields){
+  item.disabled=true;
+}
+
+//1. Активация страницы
+
 
 
 
