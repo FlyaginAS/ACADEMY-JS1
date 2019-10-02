@@ -84,9 +84,9 @@ function generatePhotos() {
 function generateX() {
   let map = document.querySelector('.map__pins');
   let width=map.offsetWidth;
-  let random = Math.floor(Math.random()*width);
-  x=random;
-  return random;
+  let random = Math.floor(Math.random()*(width-250));
+  x=random+250;
+  return x;
 }
 
 function generateY() {
@@ -142,7 +142,7 @@ function createPins(adverts) {
   }
   document.querySelector('.map__pins').append(fragment);
 }
-// createPins(adverts);
+ createPins(adverts);
 
 //создаем объявление
 function genLi(n) {
@@ -192,18 +192,151 @@ function createCard(adverts) {
   let filters=document.querySelector('.map__filters-container');
   filters.before(fragment);
 }
-// createCard(adverts);
+  createCard(adverts);
 
 //Лекция 04*************************************************************************************
 //По умолчанию все поля не активны
 let fields=document.querySelectorAll('fieldset');
-for(let item of fields){
-  item.disabled=true;
+let adForm=document.querySelector('.notice__form');
+let mapPinMain=document.querySelector('.map__pin--main');
+
+function deactivatePage(){
+  map.classList.add('map--faded');
+  adForm.classList.add('notice__form--disabled');
+  for(let item of fields){
+    item.disabled=true;
+  }
+
+  let pins=document.querySelectorAll('.map__pin');
+  for(let pin of pins){
+    pin.classList.add('visuallyhidden');
+  }
+  document.querySelector('.map__pin--main').classList.remove('visuallyhidden');
+
+  let articles=document.querySelectorAll('.map__card');
+  for(let item of articles){
+    item.style.display='none';
+  }
 }
+deactivatePage();
 
 //1. Активация страницы
+//при событии Moseup на елементе .map__pin--main сделать активными все fieldset,
+//удалить на элементе map класс .map--faded
+//удалить у элемента .ad-form класс ad-form--disabled
 
+function activatePage() {
+  map.classList.remove('map--faded');
+  adForm.classList.remove('notice__form--disabled');
+  for(let item of fields){
+    item.disabled=false;
+  }
+  let pins=document.querySelectorAll('.map__pin');
+  for(let pin of pins){
+    pin.classList.remove('visuallyhidden');
+  }
+}
+mapPinMain.addEventListener('mouseup', activatePage);
+//по клику на пине отобразить объявление
+function showArticle(s){
+  let articles=document.querySelectorAll('.map__card');
+  for(let item of articles){
+    item.style.display='none';
+    let src = item.querySelector('img').getAttribute('src');
+    if(src===s){
+      item.style.display='block';
+    }
+  }
+}
+function onDocumentClick(evt){
+  // console.log(evt.target);
+  if(evt.target.closest('.map__pin:not(.map__pin--main)')){
+    //скрываем все объяления перед показом этого ожного
+    // let articles = document.querySelector('.map__card');
+    // for(let item of articles){
+    //
+    // }
+    let img = evt.target;
+    let s= img.getAttribute('src');
+    console.log(s);
+    showArticle(s)
+  }
+}
+document.body.addEventListener('click', onDocumentClick);
 
+//2 Валидация формы
+//Ограничения, накладываемые на поля ввода
+let inputType=document.querySelector('#type');
+let inputPrice=document.querySelector('#price');
+let options=inputType.querySelectorAll('option');
+function inputTypeChangeHandler(evt) {
+  // console.log('ji');
+  // console.log(options);
+  for(let item of options){
+    if(item.selected){
+      if(item.value=='bungalo'){
+        inputPrice.setAttribute('placeholder', '0');
+        inputPrice.min=0;
+      } else if(item.value=='flat'){
+        inputPrice.setAttribute('placeholder','1000')
+        inputPrice.min=1000;
+      }else if(item.value=='house'){
+        inputPrice.setAttribute('placeholder','5000')
+        inputPrice.min=5000;
+      }else if(item.value=='palace'){
+        inputPrice.setAttribute('placeholder','10000')
+        inputPrice.min=10000;
+      }
+    }
+  }
+}
+function inputPriceChangeHandler(evt){
+  let value=inputPrice.value;
+  //обнулили состояние неактивных элтов
+  for(let item of options){
+    item.disabled=false;
+  }
+  if(value<1000){
+    for(let item of options){
+      if(item.value!='bungalo'){
+        item.disabled=true;
+      }  else{
+        item.selected=true;
+      }
+    }
+  } else
+  if(value>=1000 && value<5000){
+    for(let item of options){
+      if(item.value!='flat' && item.value!='bungalo'){
+        item.disabled=true;
+      }  else{
+        item.selected=true;
+      }
+    }
+  } else
+  if(value>=5000 && value<10000){
+    for(let item of options){
+      if(item.value!='house' && item.value!='bungalo' && item.value!='flat'){
+        item.disabled=true;
+      }  else{
+        item.selected=true;
+      }
+    }
+  } else
+  if(value>=10000){
+    for(let item of options){
+      item.disabled=false;
+    }
+  } else
+    if(value.toString().length>=1) {
+      for (let item of options) {
+        item.disabled = false;
+      }
+    }
+}
+
+inputType.addEventListener('change', inputTypeChangeHandler);
+inputPrice.addEventListener('change', inputPriceChangeHandler);
 
 
 
