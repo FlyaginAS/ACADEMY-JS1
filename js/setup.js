@@ -53,7 +53,10 @@ let form= document.querySelector('.setup-wizard-form');
 
 setupOpen.tabIndex=0;
 setupClose.tabIndex=0;
-
+let dialogPositionDefault={
+  x: userDialog.style.left,
+  y: userDialog.style.top
+};
 function onDialogEsc(evt) {
   if(evt.keyCode===27 && document.activeElement==setupClose) {
     closeDialog();
@@ -61,6 +64,8 @@ function onDialogEsc(evt) {
 }
 
 function openDialog(){
+  userDialog.style.left=dialogPositionDefault.x;
+  userDialog.style.top= dialogPositionDefault.y;
   userDialog.classList.remove('hidden');
   document.addEventListener('keydown', onDialogEsc);
 }
