@@ -339,6 +339,29 @@ inputType.addEventListener('change', inputTypeChangeHandler);
 inputPrice.addEventListener('change', inputPriceChangeHandler);
 
 
+//Лекция 05*************************************************************************************
+//перемещение метки по карте
+(function () {
+  let mapPinMain=document.querySelector('.map__pin--main');
+  mapPinMain.addEventListener('mousedown', function (evtDown) {
+    //logic
+    evt.preventDefault();
+    let coordsStart={
+      x: evtDown.clientX,
+      y: evtDown.clientY
+    };
+    function onPinmove(evtMove){
+      let shift={
+        x: evtMove.clientX- coordsStart.x,
+        y: evtMove.clientY - coordsStart.y
+      };
+      coordsStart.x=evtMove.clientX;
+      coordsStart.y=evtMove.clientY;
+    }
+    document.addEventListener('mousemove', onPinMove);
+    document.addEventListener('mouseup', onPinUp);
+  });
+})();
 
 
 
