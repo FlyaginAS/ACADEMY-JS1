@@ -107,7 +107,7 @@ setupUserName.maxLength=25;
 //Изменение цвета мантии персонажа по нажатию
 let coat = document.querySelector('.setup-wizard .wizard-coat');
 let inputCoat=document.querySelector('input[name="coat-color"]');
-console.log(inputCoat);
+// console.log(inputCoat);
 let rgb = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
@@ -166,25 +166,46 @@ fireBall.addEventListener('click', function () {
 
 //Форма должна отправляться на урл прописал в html
 
-//5 Модули
-//перемещение окна( переменная user-dialog) за фотку
-let setupUserPic= document.querySelector('.setup-user-pic');
+//5 Модули**************************************************************************************
+//перемещение окна( переменная userDialog) за фотку
+let setupUserPic= userDialog.querySelector('.upload');
 setupUserPic.addEventListener('mousedown', function (evt) {
-  evt.preventDefault();
+  // evt.preventDefault();
+  // console.log(evt.target);
   let startCoords={
     x: evt.clientX,
     y: evt.clientY
   };
+  let drag=false;
 
- function onMouseMove(moveEvt){
-    moveEvt.preventDefault();
+  function onMouseMove(moveEvt){
+    drag=true;
+    // moveEvt.preventDefault();
     let shift={
       x: moveEvt.clientX-startCoords.x,
       y: moveEvt.clientY-startCoords.y
-    }
- }
+    };
+    startCoords.x=moveEvt.clientX;
+    startCoords.y=moveEvt.clientY;
+    userDialog.style.top=(userDialog.offsetTop+shift.y) + 'px';
+    userDialog.style.left=(userDialog.offsetLeft + shift.x) + 'px';
+  }
 
+  function onMouseUp(upEvt){
+    // upEvt.preventDefault();
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+    if(drag){
+      let onClickPreventDefault = function(evt){
+          evt.preventDefault();
+          setupUserPic.removeEventListener('click', onClickPreventDefault);
+      };
+      setupUserPic.addEventListener('click', onClickPreventDefault);
+    }
+
+  }
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
+
 });
 
