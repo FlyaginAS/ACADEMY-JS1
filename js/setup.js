@@ -166,3 +166,25 @@ fireBall.addEventListener('click', function () {
 
 //Форма должна отправляться на урл прописал в html
 
+//5 Модули
+//перемещение окна( переменная user-dialog) за фотку
+let setupUserPic= document.querySelector('.setup-user-pic');
+setupUserPic.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+  let startCoords={
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+ function onMouseMove(moveEvt){
+    moveEvt.preventDefault();
+    let shift={
+      x: moveEvt.clientX-startCoords.x,
+      y: moveEvt.clientY-startCoords.y
+    }
+ }
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+});
+
