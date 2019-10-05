@@ -59,5 +59,12 @@
       submitSetup();
     }
   });
+  form.addEventListener('submit', function (evt) {
+    window.upload(new FormData(form), function (response) {
+      userDialog.classList.add('hidden');
+      console.log('sent');
+    });
+    evt.preventDefault();
+  })
 
 })();
