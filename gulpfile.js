@@ -177,7 +177,7 @@ gulp.task('serve', function () {
     server:'build'
   });
   gulp.watch('dev/**/*.*', gulp.series('copy'));
-  server.watch('build/**/*.*').on('change', server.reload);
+  server.watch(['build/*.html', 'build/js/**/*.*']).on('change', server.reload);
 });
 //*************************************************
 gulp.task('build', gulp.series('clean','copy'));

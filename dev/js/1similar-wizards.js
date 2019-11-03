@@ -35,20 +35,20 @@
     return wizardElement;
   };
 
-  window.load(function (wizards) {
-    let fragment = document.createDocumentFragment();
-    for(let i=0; i<wizards.length; i++){
-      fragment.appendChild(renderWizard(wizards[i]));
-    }
-    similarListElement.appendChild(fragment);
-    userDialog.querySelector('.setupSimilar').classList.remove('hidden');
-  });
+  // window.load(function (wizards) {
+  //   let fragment = document.createDocumentFragment();
+  //   for(let i=0; i<wizards.length; i++){
+  //     fragment.appendChild(renderWizard(wizards[i]));
+  //   }
+  //   similarListElement.appendChild(fragment);
+  //   userDialog.querySelector('.setupSimilar').classList.remove('hidden');
+  // });
 
-  // var fragment = document.createDocumentFragment();
-  // for(var i=0; i<WIZARDS_NAMES.length; i++){
-  //   fragment.appendChild(renderWizard(wizards[i]));
-  // }
-  // similarListElement.appendChild(fragment);
-  // userDialog.querySelector('.setup-similar').classList.remove('hidden');
+  var fragment = document.createDocumentFragment();
+  for(var i=0; i<WIZARDS_NAMES.length; i++){
+    fragment.appendChild(renderWizard(wizards[i]));
+  }
+  similarListElement.appendChild(fragment);
+  userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
 })();
